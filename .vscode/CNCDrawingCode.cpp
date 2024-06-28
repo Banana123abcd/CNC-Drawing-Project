@@ -16,6 +16,17 @@
 
 double CNCDimensions[] = {10,10};
 double circlePoints[] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+struct pairs
+{
+    double x;
+    double y;
+
+};
+
+struct pairs rectanglePoints[8];
+
+
+
 
 void circle(double radius, double centerX, double centerY)
 {
@@ -23,9 +34,9 @@ void circle(double radius, double centerX, double centerY)
    int i = 2;
    int j = 0;
 
-    if (0 <= centerX && centerX < CNCDimensions[1] && 0 <= centerY && centerY < CNCDimensions[1])
+    if (0 <= centerX && centerX < CNCDimensions[1] && 0 <= centerY && centerY < CNCDimensions[1] && radius > 0)
     {
-        printf("center is in plane   ");
+        printf("center is in plane and radius is a valid number  ");
 
         circlePoints[0] = centerX;
         circlePoints[1] = centerY + radius;
@@ -48,7 +59,7 @@ void circle(double radius, double centerX, double centerY)
         circlePoints[23] = centerY - radius;
 
 
-//printf("%d" , circlePoints[1]);
+
 printf("coodinates  ");
         for (j = 0; j < 22; j= j+2)
         
@@ -65,10 +76,82 @@ printf("coodinates  ");
     } else
     {
         
-        printf("Not in plane");
+        printf("Not in plane or radius is not valid");
     }
 
 }
+
+
+
+void rectangel(double length, double width, double centerX, double centerY )
+{
+    int i = 0;
+     if (0 <= centerX && centerX < CNCDimensions[1] && 0 <= centerY && centerY < CNCDimensions[1] && length > 0 && width > 0)
+    {
+        printf("center in plane and lengths are valid numbers \n");
+
+        rectanglePoints[0].x = centerX;
+        rectanglePoints[0].y = centerY + length/2;
+
+        rectanglePoints[1].x = centerX;
+        rectanglePoints[1].y = centerY - length/2;
+
+        rectanglePoints[2].x = centerX + width/2;
+        rectanglePoints[2].y =  rectanglePoints[0].y;
+
+        rectanglePoints[3].x = centerX - width/2;
+        rectanglePoints[3].y =  rectanglePoints[0].y;
+
+        rectanglePoints[4].x = centerX + width/2;
+        rectanglePoints[4].y =  rectanglePoints[0].y - length/2; 
+
+        rectanglePoints[5].x = centerX - width/2;
+        rectanglePoints[5].y =  centerY; 
+
+        rectanglePoints[6].x = centerX - width/2;
+        rectanglePoints[6].y =  centerY; 
+
+        rectanglePoints[7].x = centerX - width/2;
+        rectanglePoints[7].y =  centerY - length/2; 
+
+        rectanglePoints[8].x = centerX + width/2;
+        rectanglePoints[8].y =  centerY - length/2; 
+
+
+
+ for (i = 0; i < 9; i++)
+        
+        {
+
+         printf("(%.2f , %.2f)" , rectanglePoints[i].x, rectanglePoints[i].y);
+    
+         printf("\n");
+        }
+
+     
+
+    } else
+    {
+        printf("center is not in plane");
+    }
+} 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -76,12 +159,10 @@ printf("coodinates  ");
 int main()
 {
 
-//double CNCDimensions[] = {10,10};
-double circlePoints[] = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23};
-    circle(2,5,2);
+   // circle(2,5,2);
 
-//circlePoints[2] = 3;
-                 
-   // printf(" this is the value   %f" , arrays[2]);
+   rectangel(8,2,2,3);
+
+
     
 }
