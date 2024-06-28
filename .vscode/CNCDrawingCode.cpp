@@ -83,7 +83,7 @@ printf("coodinates  ");
 
 
 
-void rectangel(double length, double width, double centerX, double centerY )
+void rectangle(double length, double width, double centerX, double centerY )
 {
     int i = 0;
      if (0 <= centerX && centerX < CNCDimensions[1] && 0 <= centerY && centerY < CNCDimensions[1] && length > 0 && width > 0)
@@ -161,7 +161,7 @@ int main()
 
    // circle(2,5,2);
 
-   rectangel(8,2,2,3);
+   rectangle(8,2,2,3);
 
 
     
