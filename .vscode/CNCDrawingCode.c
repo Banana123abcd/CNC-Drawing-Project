@@ -23,6 +23,7 @@ double CNCDimensions[] = {10,10};
 double pi = 3.141592;
 
 
+
 struct pairs
 {
     double x;
