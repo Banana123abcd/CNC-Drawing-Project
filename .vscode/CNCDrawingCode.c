@@ -17,13 +17,13 @@
 */
 
 
-
+// Define CNC dimensions and pi
 double CNCDimensions[] = {10,10};
 
 double pi = 3.141592;
 
 
-
+// Define a struct for pairs of coordinates
 struct pairs
 {
     double x;
@@ -31,9 +31,10 @@ struct pairs
 
 };
 
+
+// Arrays to store points of different shapes
 struct pairs circlePoints[5];
 int lengthCircleArray = sizeof(circlePoints)/sizeof(circlePoints[0]);
-
 
 struct pairs rectanglePoints[8];
 
@@ -43,14 +44,14 @@ struct pairs nPolyPoints[160];
 
 
 
-
+// Function to draw a circle
 void circle (double radius, double centerX, double centerY)
 {
    int i = 0;
    double theta = 0;
    int j = 0;
 
-
+// Check if center and radius are valid
     if (0 <= centerX && centerX < CNCDimensions[1] && 0 <= centerY && centerY < CNCDimensions[1] && radius > 0)
     {
         printf("center is in plane and radius is a valid number  ");
@@ -78,14 +79,17 @@ void circle (double radius, double centerX, double centerY)
 }
 
 
-
+// Function to draw a rectangle
 void rectangle(double length, double width, double centerX, double centerY )
 {
     int i = 0;
+
+    // Check if center and dimensions are valid
      if (0 <= centerX && centerX < CNCDimensions[1] && 0 <= centerY && centerY < CNCDimensions[1] && length > 0 && width > 0)
     {
         printf("center in plane and lengths are valid numbers \n");
 
+        // Calculate and print coordinates of rectangle vertices
         rectanglePoints[0].x = centerX;
         rectanglePoints[0].y = centerY + length/2;
 
@@ -134,12 +138,13 @@ void rectangle(double length, double width, double centerX, double centerY )
 
 
 
-
+// Function to draw a triangle
 void triangle(double sideA, double sideB, double sideC, double startingX, double startingY)
 {
+    // Calculate angle C using law of cosines
+    double angleC = acos((pow(sideC,2) - pow(sideA,2) - pow(sideB,2))/(2*sideB*sideA));
 
-    double angleC = acos((pow(sideC,2) - pow(sideA,2) - pow(sideB,2))/(2*sideB*sideA));// calculating angle c using law of cosines
-
+    // Calculate and print coordinates of triangle vertices
     trianglePoints[0].x = startingX;
     trianglePoints[0].y = startingY;
     printf("(%.2f,%.2f)\n",trianglePoints[0].x,trianglePoints[0].y );
@@ -158,7 +163,7 @@ void triangle(double sideA, double sideB, double sideC, double startingX, double
 
 
 
-// only does regulan n polygons
+// Function to draw a regular polygon
 void nPoly(int numberOfSides, double sideLength, double xCenter, double yCenter)
 {
     nPolyPoints[numberOfSides-1];
@@ -167,6 +172,7 @@ void nPoly(int numberOfSides, double sideLength, double xCenter, double yCenter)
     double theta;
     double insideAngle = 2 * pi / numberOfSides;
 
+    // Calculate radius of the polygon's circumscribed circle
     radius = sideLength/(2*sin(insideAngle));
 
 
@@ -174,7 +180,7 @@ while (i < numberOfSides)
         {
 
 
-
+            // Calculate and print coordinates of polygon vertices
             nPolyPoints[i].x = (radius * cos(theta)) + xCenter;
             nPolyPoints[i].y = (radius * sin(theta)) + yCenter;
 
@@ -211,13 +217,8 @@ while (i < numberOfSides)
 int main()
 {
 
-  // circle(2,5,2);
 
-   //rectangle(8,2,2,3);
 
-   //triangle(6,8,4,1,3);
-
-   nPoly(8,5,4,7);
 
 
     
